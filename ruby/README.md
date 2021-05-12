@@ -19,7 +19,7 @@ Please note that event_id sent by HubSpot needs to be stored as int
 
 ### Setup App
 
-Make sure you have [Docker Compose](https://docs.docker.com/compose/) and [Ngrok](https://ngrok.com/) installed.
+Make sure you have [Docker Compose](https://docs.docker.com/compose/) installed.
 
 ### Configure
 
