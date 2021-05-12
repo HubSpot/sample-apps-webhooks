@@ -10,8 +10,8 @@ module = Blueprint("webhooks", __name__)
 @module.route("/handle", methods=["POST"])
 @hubspot_signature_required
 def handle():
-    messsages = json.loads(request.data)
-    producer = get_producer()
+    messages = json.loads(request.data)
+
     for message in messages:
         event = Event()
         event.event_type = message["subscriptionType"]

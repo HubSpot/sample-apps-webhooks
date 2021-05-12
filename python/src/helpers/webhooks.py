@@ -55,7 +55,7 @@ def create_or_activate_subscription(
         existing_subscription_id = json.loads(
             json.loads(e.body)["context"]["subscriptionIds"][0]
         )[0]
-        subscription_patch_request = SubscriptionPatchRequest(enabled=True)
+        subscription_patch_request = SubscriptionPatchRequest(active=True)
         hubspot_client.webhooks.subscriptions_api.update(
             subscription_id=existing_subscription_id,
             app_id=app_id,
