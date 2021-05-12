@@ -51,4 +51,16 @@ This is caused by a large amount of weebhooks events being sent to Ngrok tunnel.
 
 ### HubSpot Signature
 To help improve security, HubSpot webhooks are sent with signature so you can verify that it came from HubSpot. This sample application shows how to do that verification. You can read more about validation in general here: https://developers.hubspot.com/docs/api/webhooks/validating-requests.
-The source code for validating webhooks is at [hubspot\utils\webhooks](../../hubspot/utils/webhooks.py) and [an usage example](./src/routes/webhooks.py).
+The source code for validating webhooks is [an usage example](./src/routes/webhooks.py).
+
+### Process with the app
+
+1. Authorize your app with Hubpost OAuth (Press "Authorize" button).
+2. Subscribe to Hubspot Webhooks (Press "Continue" button).
+3. Create some Hubspot Contacts. You can use this [Sample App](https://github.com/HubSpot/sample-apps-manage-crm-objects) to do so.
+
+```
+python cli.py -m create -t contact -p '{"email":"brianhalligan@email.com","firstname":"Brian","lastname":"Halligan"}'
+```
+
+4. Reload /events page to check recieved updates.

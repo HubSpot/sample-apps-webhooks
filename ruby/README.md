@@ -55,4 +55,4 @@ The source code for validating webhooks is at [an usage example](./src/routes/we
 ruby cli.rb -m create -t contact -p '{"email":"brianhalligan@email.com","firstname":"Brian","lastname":"Halligan"}'
 ```
 
-4. Reload /events page to check recieved updated.
+4. Reload /events page to check recieved updates.
