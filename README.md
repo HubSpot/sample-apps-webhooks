@@ -20,3 +20,6 @@ cp node/.env.template node/.env
 5. Follow the language instructions on how to run.
 
 ## Supported languages
+
+* [Ruby](ruby/README.md)
+* [Python](python/README.md)
