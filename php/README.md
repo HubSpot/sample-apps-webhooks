@@ -1,8 +1,5 @@
 # HubSpot-php sample Webhooks app
 
-This is a sample app for the [hubspot-php SDK](../../../../).
-Currently, this app focuses on demonstrating the functionality of [Webhooks API](https://developers.hubspot.com/docs-beta/crm/extensions), contact creation/deletion in particular.
-
 Please note that the Webhooks events are not sent in chronological order with respect to the creation time. Events might be sent in large numbers, for example when the user imports large number of contacts or deletes a large list of contacts.
 The application demonstrates the use of Queues (Kafka in case of this application - see KafkaHelper.php) to process webhooks events.
 Common webhook processing practice consists of few steps:
@@ -36,7 +33,7 @@ Please note that event_id sent by HubSpot needs to be stored as int
 
 ### Setup App
 
-Make sure you have [Docker Compose](https://docs.docker.com/compose/) and [Ngrok](https://ngrok.com/) installed.
+Make sure you have [Docker Compose](https://docs.docker.com/compose/) installed.
 
 ### Configure
 
