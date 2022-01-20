@@ -1,4 +1,4 @@
-FROM php:7.4-apache
+FROM php:8.0.14-apache
 
 ENV APACHE_DOCUMENT_ROOT=/app/src/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
