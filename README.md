@@ -21,6 +21,7 @@ cp node/.env.template node/.env
 
 ## Supported languages
 
+* [JavaScript (Node)](node/README.md)
 * [Php](php/README.md)
 * [Python](python/README.md)
 * [Ruby](ruby/README.md)
