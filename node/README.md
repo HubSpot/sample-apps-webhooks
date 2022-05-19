@@ -70,6 +70,9 @@ The best way to run this project (with the least configuration), is using docker
 docker-compose up --build
 ```
 
+Copy the Redirect URL from the console and update your application to use it.
+Give the change some time to propagate to the HubSpot OAuth servers.
+
 Copy Ngrok url from console. Now you should now be able to navigate to that url and use the application.
 
 ### NOTE about Ngrok Too Many Connections error
