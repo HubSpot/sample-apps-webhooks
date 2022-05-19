@@ -4,7 +4,7 @@ const router = new express.Router()
 const dbHelper = require('./db-helper')
 const url = require('url')
 
-const SCOPE = 'contacts'
+const SCOPE = 'crm.objects.contacts.read'
 const CLIENT_ID = process.env.HUBSPOT_CLIENT_ID
 const CLIENT_SECRET = process.env.HUBSPOT_CLIENT_SECRET
 const AUTHORIZATION_CODE = 'authorization_code'
