@@ -181,7 +181,8 @@ app.use((error, req, res, next) => {
             console.log(`Listening on port: ${PORT}`)
             return Promise.delay(100)
                 .then(() => ngrok.connect({addr: PORT, authtoken: NGROK_AUTHTOKEN }))
-                .tap((url) => console.log('Please use:', url))
+                .tap((url) => console.log('Use %s to connect to this application.', url))
+                .tap((url) => console.log('Please update your app to use %s/auth/oauth-callback as Redirect URL.', url))
                 .then(dbHelper.saveUrl)
                 .catch(async (e) => {
                     console.log('Error during app start. ', e)
