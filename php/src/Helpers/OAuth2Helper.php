@@ -7,7 +7,7 @@ use HubSpot\Factory;
 
 class OAuth2Helper
 {
-    const APP_REQUIRED_SCOPES = ['contacts'];
+    const APP_REQUIRED_SCOPES = ['crm.objects.contacts.read'];
     const CALLBACK_PATH = '/oauth/callback';
     const SESSION_TOKENS_KEY = 'tokens';
 
@@ -55,7 +55,7 @@ class OAuth2Helper
         $tokens = $_SESSION[static::SESSION_TOKENS_KEY];
 
         if (time() > $tokens['expires_at']) {
-            $tokens = Factory::create()->auth()->oAuth()->tokensApi()->createToken(
+            $tokens = Factory::create()->auth()->oAuth()->tokensApi()->create(
                 'refresh_token',
                 null,
                 static::getRedirectUri(),
