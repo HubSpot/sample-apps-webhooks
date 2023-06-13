@@ -3,21 +3,16 @@ version: '3.5'
 services:
     zookeeper:
         container_name: php-webhooks-app-zookeeper
-        image: zookeeper:3.5
+        image: zookeeper:3.8.1
         ports:
             - "2181:2181"
-        logging:
-            driver: none
-        tmpfs: "/datalog"
     kafka:
         container_name: php-webhooks-app-kafka
-        image: wurstmeister/kafka:2.12-2.3.0
+        image: wurstmeister/kafka:2.13-2.8.1
         ports:
             - "9092:9092"
         depends_on:
             - zookeeper
-        logging:
-            driver: none
         environment:
             KAFKA_ADVERTISED_HOST_NAME: kafka
             KAFKA_ADVERTISED_PORT: 9092
@@ -69,7 +64,7 @@ services:
             MYSQL_PASSWORD: events
     ngrok:
         container_name: php-webhooks-app-ngrok
-        image: gtriggiano/ngrok-tunnel
+        build: ./docker/ngrok/
         ports:
             - 4040:4040
         environment:
