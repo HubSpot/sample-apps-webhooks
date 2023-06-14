@@ -1,7 +1,8 @@
 <?php 
 use Helpers\OAuth2Helper;
 include __DIR__.'/../_partials/header.php'; 
-?><pre>
+?><script type="application/javascript" src="/js/login.js?<?php echo filemtime('./js/login.js'); ?>"></script>
+<pre>
 // src/actions/oauth/authorize.php - Generate URL for OAuth
 $authUrl = HubSpot\Utils\OAuth2::getAuthUrl(
     'ClientID',

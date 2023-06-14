@@ -1,5 +1,5 @@
 <?php include __DIR__.'/../_partials/header.php'; ?>
-
+<script type="application/javascript" src="/js/events.js?<?php echo filemtime('./js/events.js'); ?>"></script>
 <h3 id='alert-not-shown-events' class="hidden" datetime-mark="<?php echo time(); ?>">New webhooks are received. <a href="#">Reload</a> the page to see updates</h3>
 <?php if ($paginator->getCount() > 0) { ?>
 <table>
