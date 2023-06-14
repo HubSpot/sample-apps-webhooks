@@ -2,14 +2,14 @@
 
 namespace Helpers;
 
-use ByJG\DbMigration\Migration;
 use ByJG\DbMigration\Database\MySqlDatabase;
+use ByJG\DbMigration\Migration;
 use ByJG\Util\Uri;
 use PDO;
 
 class DBClientHelper
 {
-    private static $dbClient = null;
+    private static $dbClient;
 
     public static function getClient(): PDO
     {
