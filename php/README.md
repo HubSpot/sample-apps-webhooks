@@ -53,7 +53,7 @@ Copy Ngrok url from console and designate this on your app's Auth settings page.
 ### Configure OAuth
 
 Required redirect URL should look like https://***.ngrok-free.app/oauth/callback
-Every time the app is § you should update the redirect URL.
+Every time the app is restarted you should update the redirect URL.
 [Learn more.](https://developers.hubspot.com/docs/api/oauth-quickstart-guide)
 
 ### NOTE about Ngrok Too Many Connections error
