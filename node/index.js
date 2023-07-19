@@ -78,7 +78,7 @@ const setupHubspotClient = async (req, res, next) => {
             // Create OAuth 2.0 Access Token and Refresh Tokens
             // POST /oauth/v1/token
             // https://developers.hubspot.com/docs/api/intro-to-auth
-            const result = await hubspotClient.oauth.defaultApi.createToken(
+            const result = await hubspotClient.oauth.tokensApi.create(
                 REFRESH_TOKEN,
                 undefined,
                 undefined,
@@ -87,7 +87,7 @@ const setupHubspotClient = async (req, res, next) => {
                 tokens.refresh_token,
             )
 
-            tokens = await dbHelper.updateTokens(result.body)
+            tokens = await dbHelper.updateTokens(result)
             console.log('Updated tokens', tokens)
         }
 

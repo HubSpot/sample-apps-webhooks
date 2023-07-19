@@ -34,14 +34,14 @@ exports.getRouter = () => {
         // POST /oauth/v1/token
         // https://developers.hubspot.com/docs/api/working-with-oauth
         console.log('Retrieving access token by code:', code)
-        const getTokensResponse = await req.hubspotClient.oauth.defaultApi.createToken(
+        const getTokensResponse = await req.hubspotClient.oauth.tokensApi.create(
             AUTHORIZATION_CODE,
             code,
             redirectUri,
             CLIENT_ID,
             CLIENT_SECRET,
         )
-        await dbHelper.saveTokens(getTokensResponse.body)
+        await dbHelper.saveTokens(getTokensResponse)
         res.redirect('/')
     })
 

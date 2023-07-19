@@ -1,5 +1,8 @@
 extends includes/layout
 block content
-  .container
+  .container.text-center
+    h3 In order to continue please update the redirect URL on Auth settings page  of your app
+    h4 Redirect URL
+    pre#redirectURL /auth/oauth-callback
     .authorize-button
       a(class='button' href='/auth/oauth') Authorize
