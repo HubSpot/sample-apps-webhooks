@@ -10,7 +10,7 @@ const SIGNATURE_VERSION_HEADER = 'X-HubSpot-Signature-Version'
 
 exports.getRouter = () => {
     router.post('/', async (req, res) => {
-        const events = req.body
+        const events = req
 
         console.log('Received hook events:')
         utils.logJson(events)

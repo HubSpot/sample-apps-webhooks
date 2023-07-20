@@ -11,6 +11,7 @@ const kafkaHelper = require('./js/kafka-helper')
 const eventsService = require('./js/events-service')
 const oauthController = require('./js/oauth-controller')
 const contactsController = require('./js/contacts-controller')
+const utils = require('./js/utils')
 const webhooksController = require('./js/webhooks-controller')
 const webhooksHelper = require('./js/webhooks-helper')
 
@@ -159,7 +160,8 @@ app.get('/', (req, res) => {
 
 app.get('/login', async (req, res) => {
     if (tokens.initialized) return res.redirect('/')
-    res.render('login')
+    const redirectUri = `${utils.getHostUrl(req)}/auth/oauth-callback`
+    res.render('login', {redirectUri})
 })
 
 app.use('/auth', oauthController.getRouter())
