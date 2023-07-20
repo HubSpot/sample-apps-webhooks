@@ -1,6 +1,7 @@
 const express = require('express')
 const router = new express.Router()
 const dbHelper = require('./db-helper')
+const hubspot = require('@hubspot/api-client')
 
 const utils = require('./utils')
 const kafkaHelper = require('./kafka-helper')
@@ -13,6 +14,7 @@ exports.getRouter = () => {
         const events = req
 
         console.log('Received hook events:')
+        console.log(events)
         utils.logJson(events)
         await kafkaHelper.send(events)
         res.sendStatus(200)
@@ -42,14 +44,14 @@ exports.getWebhookVerification = () => {
             const signatureVersion = req.header(SIGNATURE_VERSION_HEADER)
 
             if (
-                req.hubspotClient.webhooks.validateSignature(
+                hubspot.Signature.isValid({
                     signature,
                     clientSecret,
                     requestBody,
                     signatureVersion,
-                    webhooksUrl,
-                    req.method,
-                )
+                    url: webhooksUrl,
+                    method: req.method
+                })
             )
                 return
         } catch (e) {

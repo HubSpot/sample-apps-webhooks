@@ -87,7 +87,7 @@ exports.getRouter = () => {
             utils.logJson(contactsResponse.body)
 
             const events = await dbHelper.getEvents(contactIds)
-            const contacts = prepareContactsForView(events, contactsResponse.body.results)
+            const contacts = prepareContactsForView(events, contactsResponse.results)
             await dbHelper.setAllWebhooksEventsShown()
 
             res.render('contacts', { contacts, paginationConfig })

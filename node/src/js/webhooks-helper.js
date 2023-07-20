@@ -30,9 +30,9 @@ const getAllWebhooksSubscriptions = async () => {
     // GET /webhooks/v3/{appId}/subscriptions
     // https://developers.hubspot.com/docs/api/webhooks
     const response = await hubspotClient.webhooks.subscriptionsApi.getAll(APPLICATION_ID)
-    utils.logJson(response.body)
+    utils.logJson(response)
 
-    return response.body.results
+    return response.results
 }
 
 const createWebhooksSubscription = async (webhooksSubscription) => {
@@ -41,9 +41,9 @@ const createWebhooksSubscription = async (webhooksSubscription) => {
     // POST /webhooks/v3/{appId}/subscriptions
     // https://developers.hubspot.com/docs/api/webhooks
     const contactsResponse = await hubspotClient.webhooks.subscriptionsApi.create(APPLICATION_ID, webhooksSubscription)
-    utils.logJson(contactsResponse.body)
+    utils.logJson(contactsResponse)
 
-    return contactsResponse.body
+    return contactsResponse
 }
 
 const updateAllWebhooksSubscriptions = async (webhooksSubscriptions, active) => {
@@ -58,7 +58,7 @@ const updateAllWebhooksSubscriptions = async (webhooksSubscriptions, active) => 
     // POST /webhooks/v3/{appId}/subscriptions/batch/update
     // https://developers.hubspot.com/docs/api/webhooks
     const response = await hubspotClient.webhooks.subscriptionsApi.updateBatch(APPLICATION_ID, { inputs })
-    utils.logJson(response.body)
+    utils.logJson(response)
 }
 
 const configureWebhooksSubscriptionsSettings = async (targetUrl) => {
@@ -69,7 +69,7 @@ const configureWebhooksSubscriptionsSettings = async (targetUrl) => {
     // POST /webhooks/v3/{appId}/settings
     // https://developers.hubspot.com/docs/api/webhooks
     const response = await hubspotClient.webhooks.settingsApi.configure(APPLICATION_ID, { targetUrl })
-    utils.logJson(response.body)
+    utils.logJson(response)
 }
 
 const getWebhooksSubscriptionsToActivate = (allWebhooksSubscriptions) =>
