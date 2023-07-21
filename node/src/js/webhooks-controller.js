@@ -11,10 +11,9 @@ const SIGNATURE_VERSION_HEADER = 'X-HubSpot-Signature-Version'
 
 exports.getRouter = () => {
     router.post('/', async (req, res) => {
-        const events = req
+        const events = req.body
 
         console.log('Received hook events:')
-        console.log(events)
         utils.logJson(events)
         await kafkaHelper.send(events)
         res.sendStatus(200)
