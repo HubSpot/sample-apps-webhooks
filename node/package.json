@@ -32,6 +32,6 @@
     "pug": "^3.0.2"
   },
   "devDependencies": {
-    "nodemon": "^1.19.3"
+    "nodemon": "^3.0.1"
   }
 }
