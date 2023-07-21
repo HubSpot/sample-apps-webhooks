@@ -1,4 +1,3 @@
-
 function requestNotShownEventsCount() {
   return new Promise((resolve) => {
     $.getJSON("/webhooks/new", (data) => {

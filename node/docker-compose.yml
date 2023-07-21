@@ -1,15 +1,14 @@
-version: '2'
+version: '3.5'
 
 services:
   zookeeper:
-    image: zookeeper:3.5
+    container_name: node-webhooks-app-zookeeper
+    image: zookeeper:3.8.1
     ports:
       - 2181:2181
-    logging:
-      driver: none
-    tmpfs: "/datalog"
   kafka:
-    image: wurstmeister/kafka:2.12-2.3.0
+    container_name: node-webhooks-app-kafka
+    image: wurstmeister/kafka:2.13-2.8.1
     ports:
       - 9092:9092
     environment:
@@ -21,10 +20,8 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - zookeeper
-    logging:
-      driver: none
-
   db:
+    container_name: node-webhooks-app-db
     image: mysql:8.0
     command: mysqld --default-authentication-plugin=mysql_native_password
     volumes:
@@ -40,6 +37,7 @@ services:
       driver: none
 
   webhooks_web:
+    container_name: node-webhooks-app-web
     env_file:
       - .env
     environment:

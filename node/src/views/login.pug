@@ -1,5 +1,14 @@
 extends includes/layout
+
+block footerScripts
+  script(type='application/javascript' src='/js/login.js')
+
 block content
-  .container
+  .container.text-center
+    h3 In order to continue please update the redirect URL on Auth settings page  of your app
+    h4 Redirect URL
+    pre#redirectURL #{redirectUri}
+    button.button-primary#copyBtn Copy
+    h3 After that authorize via OAuth
     .authorize-button
       a(class='button' href='/auth/oauth') Authorize

@@ -11,6 +11,7 @@ const kafkaHelper = require('./js/kafka-helper')
 const eventsService = require('./js/events-service')
 const oauthController = require('./js/oauth-controller')
 const contactsController = require('./js/contacts-controller')
+const utils = require('./js/utils')
 const webhooksController = require('./js/webhooks-controller')
 const webhooksHelper = require('./js/webhooks-helper')
 
@@ -78,7 +79,7 @@ const setupHubspotClient = async (req, res, next) => {
             // Create OAuth 2.0 Access Token and Refresh Tokens
             // POST /oauth/v1/token
             // https://developers.hubspot.com/docs/api/intro-to-auth
-            const result = await hubspotClient.oauth.defaultApi.createToken(
+            const result = await hubspotClient.oauth.tokensApi.create(
                 REFRESH_TOKEN,
                 undefined,
                 undefined,
@@ -87,7 +88,7 @@ const setupHubspotClient = async (req, res, next) => {
                 tokens.refresh_token,
             )
 
-            tokens = await dbHelper.updateTokens(result.body)
+            tokens = await dbHelper.updateTokens(result)
             console.log('Updated tokens', tokens)
         }
 
@@ -159,7 +160,8 @@ app.get('/', (req, res) => {
 
 app.get('/login', async (req, res) => {
     if (tokens.initialized) return res.redirect('/')
-    res.render('login')
+    const redirectUri = `${utils.getHostUrl(req)}/auth/oauth-callback`
+    res.render('login', {redirectUri})
 })
 
 app.use('/auth', oauthController.getRouter())
