@@ -1,8 +1,11 @@
 # HubSpot-php sample Webhooks app
 
-Please note that the Webhooks events are not sent in chronological order with respect to the creation time. Events might be sent in large numbers, for example when the user imports large number of contacts or deletes a large list of contacts.
 The application demonstrates the use of Queues (Kafka in case of this application - see KafkaHelper.php) to process webhooks events.
+
+Please note that the Webhooks events are not sent in chronological order with respect to the creation time. Events might be sent in large numbers, for example when the user imports large number of contacts or deletes a large list of contacts.
+
 Common webhook processing practice consists of few steps:
+
 1. Handle methods receive the request sent by the webook and immediately place payload on the queue handle.php
 2. Message consumer instance(s) is running in a separate process, typically on multiple nodes in a cloud, such as AWS сonsumer.php
 3. Consumer stores webhook events in the database potentially calling an API to get full record of the object that triggered the event
@@ -13,10 +16,13 @@ Please see the documentation on [Creating an app in HubSpot](https://developers.
 
 ### HubSpot Public API links used in this application
 
-  - [Read a batch of contact objects by ID](https://developers.hubspot.com/docs-beta/crm/contacts)
+- [Read a batch of contact objects by ID](https://developers.hubspot.com/docs-beta/crm/contacts)
+
 ### Note on the Data Base
+
 This application uses MySQL database to store the events coming from Webhooks. There is a single events table:
-```
+
+```SQL
 create table if not exists events
 (
     id              INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -29,16 +35,18 @@ create table if not exists events
     created_at      datetime        default CURRENT_TIMESTAMP
 );
 ```
+
 Please note that event_id sent by HubSpot needs to be stored as int
 
 ### Setup App
 
-Make sure you have [Docker Compose](https://docs.docker.com/compose/) installed.
+Make sure you have [Docker Compose](https://docs.docker.com/compose/) installed and you have [Ngrok](https://ngrok.com/) account.
 
 ### Configure
 
 1. Copy .env.template to .env
-2. Paste your HUBSPOT_CLIENT_ID and HUBSPOT_CLIENT_SECRET
+2. Paste your HUBSPOT_CLIENT_ID, HUBSPOT_CLIENT_SECRET, HUBSPOT_APPLICATION_ID & HUBSPOT_DEVELOPER_API_KEY.
+3. Paste your NGROK_AUTHTOKEN ([You can get it in your ngrok account](https://dashboard.ngrok.com/get-started/your-authtoken))
 
 ### Running
 
@@ -63,13 +71,15 @@ This is caused by a large amount of weebhooks events being sent to Ngrok tunnel.
 
 ### Configure webhooks
 
-Required webhooks url should look like https://***.ngrok.io/webhooks/handle
+Required webhooks url should look like https://***.ngrok-free.app/webhooks/handle
 
 Following [Webhooks Setup](https://developers.hubspot.com/docs/methods/webhooks/webhooks-overview) guide please note:
+
 - Every time the app is restarted you should update the webhooks url
 - The app supports `contact.creation` and `contact.deletion` subscription types only
 - Subscription are paused by default. You need to activate them manually after creating
 
 ### HubSpot Signature
+
 To help improve security, HubSpot webhooks are sent with signature so you can verify that it came from HubSpot. This sample application shows how to do that verification. You can read more about validation in general here: https://developers.hubspot.com/docs/api/webhooks/validating-requests.
 The source code for validating webhooks is at [HubSpot\Utils\Webhooks](../../lib/Utils/Webhooks.php) and [an usage example](./src/actions/webhooks/handle.php)
